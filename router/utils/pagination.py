@@ -74,12 +74,11 @@ def pagination(count: int, page: int, collection: Collection, filter: dict = Non
     if count and count > 50:
         return NotOKResponse(code=406, msg='The maximum amount of items per page is 50.')
 
-    if count and page:
+    if count:
         items_per_page = count
-    elif (count and not page) or (not count and not page):
+
+    if (count and not page) or (not count and not page):
         current_page = 1
-        if count:
-            items_per_page = count
 
     total_pages = math.ceil(total_elements / items_per_page)
 
