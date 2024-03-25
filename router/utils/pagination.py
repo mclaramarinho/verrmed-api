@@ -1,6 +1,6 @@
 import math
 from abc import ABC
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Union
 from pymongo.collection import Collection
 from starlette.responses import JSONResponse
 from models.models import Drug, Substance
@@ -18,7 +18,7 @@ class PaginationResponse(ABC):
 
 
 class OKResponse(PaginationResponse):
-    content: List[Drug | Substance]
+    content: List[Union[Drug, Substance]]
     total_elements: int
     items_per_page: int
     current_page: int
@@ -26,7 +26,8 @@ class OKResponse(PaginationResponse):
     first_page: bool
     last_page: bool
 
-    def __init__(self, code: int, content: List[Drug | Substance], total_elements: int, items_per_page: int, current_page: int, total_pages: int, first_page: bool, last_page: bool):
+    def __init__(self, code: int, content: List[Union[Drug, Substance]], total_elements: int,
+                 items_per_page: int, current_page: int, total_pages: int, first_page: bool, last_page: bool):
         super().__init__(status_code=code)
 
         self.content = content
@@ -47,7 +48,7 @@ class NotOKResponse(PaginationResponse):
         self.message = msg
 
 
-def pagination(count: int, page: int, collection: Collection, filter: dict | None = None) -> OKResponse | NotOKResponse:
+def pagination(count: int, page: int, collection: Collection, filter: dict = None) -> Union[OKResponse, NotOKResponse]:
     f = {}
     if filter is not None and len(filter) > 0:
         f = filter
