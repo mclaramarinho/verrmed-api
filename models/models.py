@@ -2,6 +2,8 @@ from pydantic import BaseModel, Field
 from typing import List
 import uuid
 
+from typing_extensions import Optional
+
 
 class Drug(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
@@ -16,7 +18,7 @@ class Drug(BaseModel):
     viaAdministracao: str = Field(...)
     formaFisica: str = Field(...)
     ultimo_update_anvisa: str = Field(...)
-    excipientes: List[str] = Field(...)
+    excipientes: Optional[List[str]]
 
     class Config:
         allow_population_by_field_name = True
