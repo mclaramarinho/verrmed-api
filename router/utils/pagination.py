@@ -18,7 +18,7 @@ class PaginationResponse(ABC):
 
 
 class OKResponse(PaginationResponse):
-    content: List[Dict[str, Any] | Drug | Substance]
+    content: List[Drug | Substance]
     total_elements: int
     items_per_page: int
     current_page: int
@@ -26,7 +26,7 @@ class OKResponse(PaginationResponse):
     first_page: bool
     last_page: bool
 
-    def __init__(self, code: int, content: List[Dict[str, Any]], total_elements: int, items_per_page: int, current_page: int, total_pages: int, first_page: bool, last_page: bool):
+    def __init__(self, code: int, content: List[Drug | Substance], total_elements: int, items_per_page: int, current_page: int, total_pages: int, first_page: bool, last_page: bool):
         super().__init__(status_code=code)
 
         self.content = content
