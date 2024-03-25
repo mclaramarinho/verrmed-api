@@ -16,7 +16,7 @@ class Drug(BaseModel):
     viaAdministracao: str = Field(...)
     formaFisica: str = Field(...)
     ultimo_update_anvisa: str = Field(...)
-    excipientes: List[str | None] = Field(...)
+    excipientes: List[str] = Field(...)
 
     class Config:
         allow_population_by_field_name = True
