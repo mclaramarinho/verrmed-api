@@ -66,7 +66,7 @@ class PutResponse(BaseModel):
 
 class UpdateStatsBody(BaseModel):
     time_spent: int = Field(...)
-    tokens_spent: str | int = Field(...)
+    tokens_spent: int = Field(...)
     success: bool = Field(...)
     page: int = Field(...)
 
@@ -74,8 +74,8 @@ class UpdateStatsBody(BaseModel):
         allow_population_by_field_name = True
         schema_extra = {
             "example": {
-                "time_spent": "12342312",
-                "tokens_spent": "1234512342133",
+                "time_spent": 123423,
+                "tokens_spent": 12345123,
                 "success": True,
                 "page": '2'
             }
