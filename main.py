@@ -12,18 +12,18 @@ app = FastAPI()
 @app.get('/')
 async def root():
     return {"message": "Verr Med - Official API"}
-
-
-def startup():
-    print(f"Connected to verrmed")
-
-
-def shutdown():
-    print("Closed")
-
-
-app.add_event_handler("startup", func=startup)
-app.add_event_handler("shutdown", func=shutdown)
+#
+#
+# def startup():
+#     print(f"Connected to verrmed")
+#
+#
+# def shutdown():
+#     print("Closed")
+#
+#
+# app.add_event_handler("startup", func=startup)
+# app.add_event_handler("shutdown", func=shutdown)
 
 app.add_middleware(CORSMiddleware,
                    allow_origins=["*"],
