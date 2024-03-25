@@ -7,7 +7,7 @@ from models.models import Drug, Substance
 
 
 def handle_500_response(e: Exception):
-    return JSONResponse(status_code=500, content={"message": 'We ran into an unexpected problem.', "details": e})
+    return JSONResponse(status_code=500, content={"message": 'We ran into an unexpected problem.', "details": str(e)})
 
 
 class PaginationResponse(ABC):
