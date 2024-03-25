@@ -18,7 +18,7 @@ class Drug(BaseModel):
     viaAdministracao: str = Field(...)
     formaFisica: str = Field(...)
     ultimo_update_anvisa: str = Field(...)
-    excipientes: Optional[List[str]]
+    excipientes: List[str] = Field(...)
 
     class Config:
         allow_population_by_field_name = True
@@ -81,7 +81,7 @@ class GetAllSubstancesRes(BaseModel):
 
 
 class GetAllResponse(BaseModel):
-    content: List[Drug | None] = Field(...)
+    content: List[Drug] = Field(...)
     totalElements: int = Field(..., alias='totalElements')
     elementsPerPage: int = Field(...)
     currentPage: int = Field(...)

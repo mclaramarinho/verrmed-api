@@ -8,7 +8,7 @@ class PutDrugBody(BaseModel):
     numeroRegistro: Optional[str]
     principiosAtivos: Optional[List[str]]
     categoriaRegulatoria: Optional[str]
-    excipientes: Optional[List[str | None]]
+    excipientes: Optional[List[str]]
     viaAdministracao: Optional[str]
     formaFisica: Optional[str]
     lab: Optional[str]
@@ -69,6 +69,7 @@ class UpdateStatsBody(BaseModel):
     tokens_spent: str | int = Field(...)
     success: bool = Field(...)
     page: int = Field(...)
+
     class Config:
         allow_population_by_field_name = True
         schema_extra = {
