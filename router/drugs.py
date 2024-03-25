@@ -37,6 +37,7 @@ async def get_drug_by_name(name: str, req: Request, count: int = None, page : in
     try:
         database = DBCollection(req.url.path)
         col = database.collection
+        name = name.upper()
 
         r = pagination(count, page, col, filter={'nomeComercial': {"$regex": name}})
 
