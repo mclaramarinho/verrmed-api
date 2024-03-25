@@ -17,10 +17,7 @@ DESC_UPDATE_SUBST_NAMES = '''Update the available inactive substances by sending
                 To perform this action, enter an update api key.'''
 
 
-def get_response_doc(what, desc_401: str | None = None,
-                     desc_404: str | None = None,
-                     desc_406: str | None = None,
-                     desc_500: str | None = None):
+def get_response_doc(what, desc_401: str = None, desc_404: str = None, desc_406: str = None, desc_500: str = None):
 
     desc_401 = "UNAUTHORIZED - If the x-api-key header is not informed or is invalid." if desc_401 is None else desc_401
     desc_404 = "NOT FOUND" if desc_404 is None else desc_404
