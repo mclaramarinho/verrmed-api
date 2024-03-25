@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.get(path="/all", responses=get_response_doc('subst'))
-async def get_all(req: Request, count: int | None = None, page: int | None = None, api_key: str = Depends(get_api_key)):
+async def get_all(req: Request, count: int = None, page: int = None, api_key: str = Depends(get_api_key)):
     collection = DBCollection(req.url.path).collection
     r = pagination(count, page, collection)
 

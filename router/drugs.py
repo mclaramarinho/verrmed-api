@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.get('/all', responses=get_response_doc('drugs'))
-async def get_all_drugs(req: Request, count: int | None = None, page: int | None = None, api_key: str = Depends(get_api_key)):
+async def get_all_drugs(req: Request, count: int = None, page: int = None, api_key: str = Depends(get_api_key)):
     try:
         database = DBCollection(req.url.path)
         col = database.collection
@@ -33,7 +33,7 @@ async def get_all_drugs(req: Request, count: int | None = None, page: int | None
 
 
 @router.get('/{name}', responses=get_response_doc("drugsByName"))
-async def get_drug_by_name(name: str, req: Request, count: int | None = None, page : int | None = None, api_key: str = Depends(get_api_key)):
+async def get_drug_by_name(name: str, req: Request, count: int = None, page : int = None, api_key: str = Depends(get_api_key)):
     try:
         database = DBCollection(req.url.path)
         col = database.collection
