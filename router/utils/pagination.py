@@ -66,8 +66,8 @@ def pagination(count: int, page: int, collection: Collection, filter: dict = Non
     last_page = False
 
     if total_elements == 0:
-        if count and count <= 50:
-            items_per_page = count
+        # if count and count <= 50:
+        #     items_per_page = count
         return OKResponse(code=200, content=content, total_elements=total_elements, items_per_page=items_per_page,
                           current_page=current_page, total_pages=total_pages, first_page=first_page, last_page=last_page)
 
@@ -77,8 +77,10 @@ def pagination(count: int, page: int, collection: Collection, filter: dict = Non
     if count:
         items_per_page = count
 
-    if (count and not page) or (not count and not page):
+    if not page:
         current_page = 1
+    else:
+        current_page = page
 
     total_pages = math.ceil(total_elements / items_per_page)
 
@@ -87,7 +89,7 @@ def pagination(count: int, page: int, collection: Collection, filter: dict = Non
 
     skip = (current_page * items_per_page) - items_per_page
     limit = (current_page * items_per_page) - skip
-
+    print(skip)
     c = list(collection.find(filter=f).skip(skip).limit(limit))
 
     for item in c:
