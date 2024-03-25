@@ -43,4 +43,4 @@ app.include_router(updates.router, prefix="/api/updates", tags=["updates"])
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8080)
+    uvicorn.run(app)
