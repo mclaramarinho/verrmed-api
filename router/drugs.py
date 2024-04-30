@@ -1,6 +1,8 @@
 import datetime
 import uuid
 from typing import List
+
+import pymongo
 from fastapi import APIRouter, Body, Depends
 from starlette.responses import JSONResponse
 from db import DBCollection
@@ -39,7 +41,7 @@ async def get_drug_by_name(name: str, req: Request, count: int = None, page : in
         col = database.collection
         name = name.upper()
 
-        r = pagination(count, page, col, filter={'nomeComercial': {"$regex": name}})
+        r = pagination(count, page, col, filter={'nomeComercial': {"$regex": name}}, sort=[("nomeComercial", pymongo.ASCENDING)])
 
         if r.code == 200:
             return GetAllResponse(content=r.content, totalElements=r.total_elements, elementsPerPage=r.items_per_page,

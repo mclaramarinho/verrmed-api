@@ -1,4 +1,6 @@
 import uuid
+
+import pymongo
 from fastapi import APIRouter, Body, Depends
 from typing import List
 from fastapi.requests import Request
@@ -15,7 +17,7 @@ router = APIRouter()
 @router.get(path="/getByName", responses=get_response_doc('subst'))
 async def get_by_name(req: Request, name: str, count: int = None, page: int = None, api_key: str = Depends(get_api_key)):
     collection = DBCollection(req.url.path).collection
-    r = pagination(count, page, collection, filter={'name': {'$regex': name}})
+    r = pagination(count, page, collection, filter={'name': {'$regex': name}}, sort=[("name", pymongo.ASCENDING)])
 
     if r.code == 200:
         return GetAllSubstancesRes(content=r.content, totalElements=r.total_elements, elementsPerPage=r.items_per_page,
