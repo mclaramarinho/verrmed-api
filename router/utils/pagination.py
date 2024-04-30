@@ -48,7 +48,7 @@ class NotOKResponse(PaginationResponse):
         self.message = msg
 
 
-def pagination(count: int, page: int, collection: Collection, filter: dict = None) -> Union[OKResponse, NotOKResponse]:
+def pagination(count: int, page: int, collection: Collection, filter: dict = None, sort: List[tuple] = None) -> Union[OKResponse, NotOKResponse]:
     f = {}
     if filter is not None and len(filter) > 0:
         f = filter
@@ -90,7 +90,7 @@ def pagination(count: int, page: int, collection: Collection, filter: dict = Non
     skip = (current_page * items_per_page) - items_per_page
     limit = (current_page * items_per_page) - skip
     print(skip)
-    c = list(collection.find(filter=f).skip(skip).limit(limit))
+    c = list(collection.find(filter=f).sort(sort).skip(skip).limit(limit))
 
     for item in c:
         item['_id'] = str(item['_id'])
